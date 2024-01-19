@@ -8,6 +8,7 @@ const SearchWeather = () => {
   const [temprature, setTemprature] = useState("48");
   const [humidity, setHumidity] = useState("");
   const [wind, setWind] = useState("");
+  const [icon, setIcon] = useState("");
 
   return (
     <div>
