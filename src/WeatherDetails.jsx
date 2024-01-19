@@ -3,7 +3,9 @@ const WeatherDetails = (props) => {
     <div>
       <h2>{props.city}</h2>
       <p>{props.temprature}</p>
-      <p>Thu / 41 Air Quality 444-Hazards</p>
+      <p>
+        {props.date} / 41 {props.humidity} {props.wind} {props.icon}
+      </p>
     </div>
   );
 };
