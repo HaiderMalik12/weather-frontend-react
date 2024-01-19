@@ -11,6 +11,8 @@ const SearchWeather = () => {
   const [wind, setWind] = useState("");
   const [icon, setIcon] = useState("");
 
+  //set forecast array
+
   // Make the API CALL to FETCH THE DEFAULT LOCATION WEATHER
   // RENDER THE WEATHER DETAILS
   async function getWeather() {
@@ -60,6 +62,9 @@ const SearchWeather = () => {
         wind={wind}
         icon={icon}
       />
+
+      {/* map the forecast array */}
+      {/* render the forcast item here */}
     </div>
   );
 };
