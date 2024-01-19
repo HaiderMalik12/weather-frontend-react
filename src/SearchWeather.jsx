@@ -4,6 +4,7 @@ import WeatherDetails from "./WeatherDetails";
 const SearchWeather = () => {
   const [location, setLocation] = useState("Faisalabad");
   const [city, setCity] = useState("");
+  const [time, setTime] = useState("");
   const [date, setDate] = useState("");
   const [temprature, setTemprature] = useState("");
   const [humidity, setHumidity] = useState("");
@@ -22,6 +23,7 @@ const SearchWeather = () => {
     setHumidity(weather.humidity);
     setWind(weather.wind);
     setIcon(weather.icon);
+    setTime(weather.time);
   }
 
   useEffect(() => {
@@ -50,6 +52,7 @@ const SearchWeather = () => {
       </form>
 
       <WeatherDetails
+        time={time}
         city={location}
         temprature={temprature}
         date={date}
