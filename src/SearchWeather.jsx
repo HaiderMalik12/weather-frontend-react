@@ -30,7 +30,13 @@ const SearchWeather = () => {
 
   return (
     <div>
-      <form>
+      <form
+        onSubmit={(e) => {
+          console.log("SUbmitted!");
+          e.preventDefault();
+          getWeather();
+        }}
+      >
         <label htmlFor="location">
           Location
           <input
@@ -41,11 +47,10 @@ const SearchWeather = () => {
           />
         </label>
         <button>Submit</button>
-        {/* UPDATE THE WEATHER DETAILS BY CALLING HERE */}
       </form>
 
       <WeatherDetails
-        city={city}
+        city={location}
         temprature={temprature}
         date={date}
         humidity={humidity}
