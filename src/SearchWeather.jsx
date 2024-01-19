@@ -1,8 +1,15 @@
 const SearchWeather = () => {
+  const location = "Faislabad";
+
   return (
     <div>
-      <input type="text" placeholder="Search Weather" />
-      <button>Search</button>
+      <form>
+        <label htmlFor="location">
+          Location
+          <input id="location" value={location} placeholder="Location" />
+        </label>
+        <button>Submit</button>
+      </form>
     </div>
   );
 };
