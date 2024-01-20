@@ -1,6 +1,5 @@
 import { createRoot } from "react-dom/client";
 import SearchWeather from "./SearchWeather";
-import ForeCastList from "./ForeCastList";
 
 const App = () => {
   //FETCH THE WEATHER DETAIL FROM THE BACKEND API ON DEFAULTE WEATHER DETAILS
@@ -10,8 +9,6 @@ const App = () => {
     <div>
       <h1>Weather App</h1>
       <SearchWeather />
-
-      <ForeCastList />
     </div>
   );
 };

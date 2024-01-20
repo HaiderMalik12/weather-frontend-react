@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import WeatherDetails from "./WeatherDetails";
+import ForeCastDay from "./ForeCastDay";
 
 const SearchWeather = () => {
   const [location, setLocation] = useState("Faisalabad");
@@ -12,6 +13,7 @@ const SearchWeather = () => {
   const [icon, setIcon] = useState("");
 
   //set forecast array
+  const [forecast, setForcast] = useState([]);
 
   // Make the API CALL to FETCH THE DEFAULT LOCATION WEATHER
   // RENDER THE WEATHER DETAILS
@@ -26,6 +28,7 @@ const SearchWeather = () => {
     setWind(weather.wind);
     setIcon(weather.icon);
     setTime(weather.time);
+    setForcast(weather.forecast);
   }
 
   useEffect(() => {
@@ -63,8 +66,24 @@ const SearchWeather = () => {
         icon={icon}
       />
 
-      {/* map the forecast array */}
-      {/* render the forcast item here */}
+      {forecast.map((f, index) => {
+        return (
+          <div key={index}>
+            <h2>{f.date}</h2>
+            {f.hours.map((hour, index) => {
+              return (
+                <ForeCastDay
+                  key={index}
+                  time={hour.time}
+                  humidity={hour.humidity}
+                  temperature={hour.temperature}
+                  icon={hour.icon}
+                />
+              );
+            })}
+          </div>
+        );
+      })}
     </div>
   );
 };
