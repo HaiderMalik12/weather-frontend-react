@@ -16,17 +16,15 @@ const WeatherDetails = ({
       <Card.Body>
         <Card.Title>
           <p>
-            {" "}
             {city} {temperature} &deg;{" "}
           </p>
-
           <img src={icon} alt="Weather data by WeatherAPI.com" border="0" />
         </Card.Title>
         <Card.Text>
           <Row>
             <Col>
-              <p> 12 AM{time}</p>
               <p>{date}</p>
+              <p> {time}</p>
             </Col>
             <Col>
               <p>Wind: {wind}</p>
