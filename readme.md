@@ -15,3 +15,5 @@ npm install
 ```bash
 npm run dev
 ```
+
+Your project will be runnint at `http://localhost:5173/`
