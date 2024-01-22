@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
+import Table from "react-bootstrap/Table";
 
 const SearchWeather = () => {
   const [location, setLocation] = useState("Faisalabad");
@@ -79,24 +79,7 @@ const SearchWeather = () => {
         </Col>
       </Row>
 
-      {forecast.map((f, index) => {
-        return (
-          <div key={index}>
-            <h2>{f.date}</h2>
-            {f.hours.map((hour, index) => {
-              return (
-                <ForeCastDay
-                  key={index}
-                  time={hour.time}
-                  humidity={hour.humidity}
-                  temperature={hour.temperature}
-                  icon={hour.icon}
-                />
-              );
-            })}
-          </div>
-        );
-      })}
+      <ForeCastDay forecast={forecast} />
     </Container>
   );
 };
