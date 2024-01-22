@@ -4,6 +4,9 @@ import ForeCastDay from "./ForeCastDay";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 
 const SearchWeather = () => {
   const [location, setLocation] = useState("Faisalabad");
@@ -40,26 +43,52 @@ const SearchWeather = () => {
 
   return (
     <Container>
-      <Form
-        onSubmit={(e) => {
-          console.log("SUbmitted!");
-          e.preventDefault();
-          getWeather();
-        }}
-      >
-        <Form.Group className="mb-3" controlId="formLocation">
-          <Form.Control
-            onChange={(e) => setLocation(e.target.value)}
-            type="text"
-            value={location}
-            placeholder="Enter Location"
-          />
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
-          Search
-        </Button>
-      </Form>
+      <Row>
+        <Col>
+          <Form
+            onSubmit={(e) => {
+              console.log("SUbmitted!");
+              e.preventDefault();
+              getWeather();
+            }}
+          >
+            <Form.Group className="mb-3" controlId="formLocation">
+              <Form.Control
+                onChange={(e) => setLocation(e.target.value)}
+                type="text"
+                className="form-control-sm"
+                value={location}
+                placeholder="Enter Location"
+              />
+            </Form.Group>
+            <Button className="float-right" variant="primary" type="submit">
+              Search
+            </Button>
+          </Form>
+        </Col>
+        <Col>
+          <Card>
+            <Card.Body>
+              <Card.Title>
+                {location} {temprature} &deg;{" "}
+                <img
+                  src={icon}
+                  alt="Weather data by WeatherAPI.com"
+                  border="0"
+                />
+              </Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">
+                12 AM{time}
+              </Card.Subtitle>
+              <Card.Text>
+                <p>{date}</p>
+                <p>Wind: {wind}</p>
+                <p>Humidity {humidity}</p>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
 
       <WeatherDetails
         time={time}
