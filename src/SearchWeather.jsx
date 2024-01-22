@@ -54,7 +54,6 @@ const SearchWeather = () => {
         <Col>
           <Form
             onSubmit={(e) => {
-              console.log("SUbmitted!");
               e.preventDefault();
               getWeather();
             }}
@@ -68,7 +67,7 @@ const SearchWeather = () => {
                 type="text"
                 className="form-control-sm"
                 value={location}
-                placeholder="Enter Location"
+                placeholder="Enter City"
                 isInvalid={isLocationInvalid}
                 required
               />
@@ -81,7 +80,7 @@ const SearchWeather = () => {
         <Col>
           <WeatherDetails
             time={time}
-            city={location}
+            city={city}
             temperature={temperature}
             date={date}
             humidity={humidity}
