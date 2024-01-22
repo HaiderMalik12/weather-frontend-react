@@ -13,7 +13,7 @@ const SearchWeather = () => {
   const [city, setCity] = useState("");
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
-  const [temprature, setTemprature] = useState("");
+  const [temperature, setTemperature] = useState("");
   const [humidity, setHumidity] = useState("");
   const [wind, setWind] = useState("");
   const [icon, setIcon] = useState("");
@@ -29,7 +29,7 @@ const SearchWeather = () => {
 
     setCity(weather.city);
     setDate(weather.date);
-    setTemprature(weather.temprature);
+    setTemperature(weather.temprature);
     setHumidity(weather.humidity);
     setWind(weather.wind);
     setIcon(weather.icon);
@@ -67,38 +67,17 @@ const SearchWeather = () => {
           </Form>
         </Col>
         <Col>
-          <Card>
-            <Card.Body>
-              <Card.Title>
-                {location} {temprature} &deg;{" "}
-                <img
-                  src={icon}
-                  alt="Weather data by WeatherAPI.com"
-                  border="0"
-                />
-              </Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
-                12 AM{time}
-              </Card.Subtitle>
-              <Card.Text>
-                <p>{date}</p>
-                <p>Wind: {wind}</p>
-                <p>Humidity {humidity}</p>
-              </Card.Text>
-            </Card.Body>
-          </Card>
+          <WeatherDetails
+            time={time}
+            city={location}
+            temperature={temperature}
+            date={date}
+            humidity={humidity}
+            wind={wind}
+            icon={icon}
+          />
         </Col>
       </Row>
-
-      <WeatherDetails
-        time={time}
-        city={location}
-        temprature={temprature}
-        date={date}
-        humidity={humidity}
-        wind={wind}
-        icon={icon}
-      />
 
       {forecast.map((f, index) => {
         return (
