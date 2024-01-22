@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import WeatherDetails from "./WeatherDetails";
 import ForeCastDay from "./ForeCastDay";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 
 const SearchWeather = () => {
   const [location, setLocation] = useState("Faisalabad");
@@ -36,25 +39,27 @@ const SearchWeather = () => {
   }, []);
 
   return (
-    <div>
-      <form
+    <Container>
+      <Form
         onSubmit={(e) => {
           console.log("SUbmitted!");
           e.preventDefault();
           getWeather();
         }}
       >
-        <label htmlFor="location">
-          Location
-          <input
+        <Form.Group className="mb-3" controlId="formLocation">
+          <Form.Control
             onChange={(e) => setLocation(e.target.value)}
-            id="location"
+            type="text"
             value={location}
-            placeholder="Location"
+            placeholder="Enter Location"
           />
-        </label>
-        <button>Submit</button>
-      </form>
+        </Form.Group>
+
+        <Button variant="primary" type="submit">
+          Search
+        </Button>
+      </Form>
 
       <WeatherDetails
         time={time}
@@ -84,7 +89,7 @@ const SearchWeather = () => {
           </div>
         );
       })}
-    </div>
+    </Container>
   );
 };
 

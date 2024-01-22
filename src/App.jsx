@@ -1,15 +1,14 @@
 import { createRoot } from "react-dom/client";
 import SearchWeather from "./SearchWeather";
-
+import Container from "react-bootstrap/Container";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 const App = () => {
   return (
-    <div>
-      <h1>Weather App</h1>
+    <Container className="p-3">
       <SearchWeather />
-    </div>
+    </Container>
   );
 };
 
