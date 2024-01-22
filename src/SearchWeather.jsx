@@ -20,20 +20,28 @@ const SearchWeather = () => {
   //set forecast array
   const [forecast, setForcast] = useState([]);
 
+  const [isLocationInvalid, setIsLocationInvalid] = useState(false);
+
   // Make the API CALL to FETCH THE DEFAULT LOCATION WEATHER
   // RENDER THE WEATHER DETAILS
   async function getWeather() {
-    const res = await fetch(`http://localhost:3001/api/weather/${location}`);
-    const weather = await res.json();
+    if (location.trim() === "") {
+      setIsLocationInvalid(true);
+    } else {
+      setIsLocationInvalid(false);
+      // Continue with your weather fetching logic
+      const res = await fetch(`http://localhost:3001/api/weather/${location}`);
+      const weather = await res.json();
 
-    setCity(weather.city);
-    setDate(weather.date);
-    setTemperature(weather.temprature);
-    setHumidity(weather.humidity);
-    setWind(weather.wind);
-    setIcon(weather.icon);
-    setTime(weather.time);
-    setForcast(weather.forecast);
+      setCity(weather.city);
+      setDate(weather.date);
+      setTemperature(weather.temprature);
+      setHumidity(weather.humidity);
+      setWind(weather.wind);
+      setIcon(weather.icon);
+      setTime(weather.time);
+      setForcast(weather.forecast);
+    }
   }
 
   useEffect(() => {
@@ -53,11 +61,16 @@ const SearchWeather = () => {
           >
             <Form.Group className="mb-3" controlId="formLocation">
               <Form.Control
-                onChange={(e) => setLocation(e.target.value)}
+                onChange={(e) => {
+                  setLocation(e.target.value);
+                  setIsLocationInvalid(false); // Reset the validation when the user types
+                }}
                 type="text"
                 className="form-control-sm"
                 value={location}
                 placeholder="Enter Location"
+                isInvalid={isLocationInvalid}
+                required
               />
             </Form.Group>
             <Button className="float-right" variant="primary" type="submit">

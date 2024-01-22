@@ -9,7 +9,7 @@ const ForeCastDay = ({ forecast }) => {
         {forecast.map((f, index) => {
           return (
             <Container key={index}>
-              <h3>{f.date}</h3>
+              <h4>{f.date}</h4>
               <Table striped bordered hover>
                 <thead>
                   <tr>

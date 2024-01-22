@@ -15,9 +15,9 @@ const WeatherDetails = ({
     <Card>
       <Card.Body>
         <Card.Title>
-          <p>
+          <h4>
             {city} {temperature} &deg;{" "}
-          </p>
+          </h4>
           <img src={icon} alt="Weather data by WeatherAPI.com" border="0" />
         </Card.Title>
         <Card.Text>
