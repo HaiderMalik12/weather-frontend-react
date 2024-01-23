@@ -14,7 +14,7 @@ const WeatherDetails = ({
 }) => {
   return (
     <Link to={`/forecast/${city}`} style={{ textDecoration: "none" }}>
-      <Card>
+      {/* <Card>
         <Card.Body>
           <Card.Title>
             <h4>
@@ -35,6 +35,18 @@ const WeatherDetails = ({
             </Row>
           </Card.Text>
         </Card.Body>
+      </Card> */}
+
+      <Card className="weather-card">
+        <Card.Title>Weather Information</Card.Title>
+        <Card.Text>Temperature: {temperature} &deg;</Card.Text>
+        <Card.Text>
+          <img src={icon} alt="Weather Icon" />
+        </Card.Text>
+        <Card.Text>Humidity: {humidity}%</Card.Text>
+        <Card.Text>Date: {date}</Card.Text>
+        <Card.Text>Wind: {wind} km/h</Card.Text>
+        <Card.Text>Time: {time}</Card.Text>
       </Card>
     </Link>
   );
