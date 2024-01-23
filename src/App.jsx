@@ -5,6 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const App = () => {
   return (
@@ -14,9 +15,12 @@ const App = () => {
           <h2 className="header">Weather App</h2>
         </Container>
       </Navbar>
-      <Container className="p-3">
-        <SearchWeather />
-      </Container>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<SearchWeather />}></Route>
+          <Route path="/forecast/:location" element={<SearchWeather />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 };

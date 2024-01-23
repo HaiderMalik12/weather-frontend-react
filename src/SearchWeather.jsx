@@ -50,7 +50,7 @@ const SearchWeather = () => {
   }, []);
 
   return (
-    <Container>
+    <Container className="p-3">
       <Row>
         <Col>
           <Form
