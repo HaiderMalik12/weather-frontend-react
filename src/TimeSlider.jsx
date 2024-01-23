@@ -1,20 +1,10 @@
 import { useState } from "react";
+import { Container, Row, Col, Form } from "react-bootstrap";
 
 const TimeSlider = () => {
-  const [rangeval, setRangeval] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(12); // Default selected time
 
-  return (
-    <div>
-      <h4> {rangeval}AM</h4>
-      <input
-        type="range"
-        className="custom-range"
-        min="1"
-        max="24"
-        onChange={(event) => setRangeval(event.target.value)}
-      />
-    </div>
-  );
+  return <div>Hello Slider</div>;
 };
 
 export default TimeSlider;
