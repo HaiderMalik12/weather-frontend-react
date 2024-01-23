@@ -16,7 +16,11 @@ const WeatherDetails = ({
     <Link to={`/forecast/${city}`} style={{ textDecoration: "none" }}>
       <Card
         className="weather-card"
-        style={{ backgroundColor: "#42A5F5", color: "white" }}
+        style={{
+          backgroundColor: "#42A5F5",
+          color: "white",
+          border: "1px solid white",
+        }}
       >
         <Card.Title>Weather Information</Card.Title>
         <Card.Text>Temperature: {temperature} &deg;</Card.Text>

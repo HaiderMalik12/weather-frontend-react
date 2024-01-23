@@ -89,7 +89,11 @@ const SearchWeather = () => {
               <Button
                 type="submit"
                 variant="primary"
-                style={{ marginLeft: "10px", backgroundColor: "#42A5F5" }}
+                style={{
+                  marginLeft: "10px",
+                  backgroundColor: "#42A5F5",
+                  border: "1px solid white",
+                }}
               >
                 Search
               </Button>
