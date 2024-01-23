@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import TimeSliderComponent from "./TimeSlider";
 
 const SearchWeather = () => {
   const [location, setLocation] = useState("Faisalabad");
@@ -91,6 +92,8 @@ const SearchWeather = () => {
       </Row>
 
       <ForeCastDay forecast={forecast} />
+
+      <TimeSliderComponent timeRange={{ min: 0, max: 24 }} />
     </Container>
   );
 };
