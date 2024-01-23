@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import WeatherDetails from "./WeatherDetails";
-import ForeCastDay from "./ForeCastDay";
+// import ForeCastDay from "./ForeCastDay";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import TimeSliderComponent from "./TimeSlider";
-import Card from "react-bootstrap/Card";
 
 const SearchWeather = () => {
   const [location, setLocation] = useState("Faisalabad");
@@ -20,7 +18,7 @@ const SearchWeather = () => {
   const [icon, setIcon] = useState("");
 
   //set forecast array
-  const [forecast, setForcast] = useState([]);
+  // const [forecast, setForcast] = useState([]);
 
   const [isLocationInvalid, setIsLocationInvalid] = useState(false);
 
@@ -42,7 +40,7 @@ const SearchWeather = () => {
       setWind(weather.wind);
       setIcon(weather.icon);
       setTime(weather.time);
-      setForcast(weather.forecast);
+      // setForcast(weather.forecast);
     }
   }
 
