@@ -44,15 +44,19 @@ const Forecast = () => {
   useEffect(() => {
     const hoursOnly = getHours(selectedTime);
 
-    const selectedForecast = forecast.hours.find((h) => {
-      return h.hoursInNumber === hoursOnly;
-    });
-
-    if (selectedForecast) {
-      setTemperature(selectedForecast.temperature);
-      setHumidity(selectedForecast.humidity);
-      setIcon(selectedForecast.icon);
-      setTime(selectedForecast.time);
+    if (forecast.hours && forecast.hours.length) {
+      const selectedForecast = forecast.hours.find((h) => {
+        return h.hoursInNumber === hoursOnly;
+      });
+      if (selectedForecast) {
+        setTemperature(selectedForecast.temperature);
+        setHumidity(selectedForecast.humidity);
+        setIcon(selectedForecast.icon);
+        setTime(selectedForecast.time);
+      } else {
+        // Handle the case when forecast.hours is not available or empty
+        console.warn("No hours data available in the forecast.");
+      }
     }
   }, [selectedTime, forecast]);
 
