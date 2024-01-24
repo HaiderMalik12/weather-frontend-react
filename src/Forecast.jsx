@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import TimeSlider from "./TimeSlider";
 import { Container, Row, Col, Form } from "react-bootstrap";
+import moment from "moment";
+
 import WeatherDetails from "./WeatherDetails";
+import ErrorBoundary from "./ErrorBoundary";
 
 const Forecast = () => {
   const [city, setCity] = useState("");
@@ -12,88 +14,109 @@ const Forecast = () => {
   const [humidity, setHumidity] = useState("");
   const [wind, setWind] = useState("");
   const [icon, setIcon] = useState("");
-
-  const [forecast, setForcast] = useState([]);
-  const [selectedTime, setSelectedTime] = useState(12); // Default selected time
+  const [forecast, setForecast] = useState({});
+  const [selectedTime, setSelectedTime] = useState(3);
 
   const { search } = useParams();
 
   async function getForecast() {
-    const res = await fetch(`http://localhost:3001/api/forecast/${search}`);
-    const weather = await res.json();
+    try {
+      const res = await fetch(`http://localhost:3001/api/forecast/${search}`);
+      const weather = await res.json();
 
-    console.log(JSON.stringify(weather));
-
-    setCity(weather.city);
-    setDate(weather.date);
-    setTemperature(weather.temprature);
-    setHumidity(weather.humidity);
-    setWind(weather.wind);
-    setIcon(weather.icon);
-    setTime(weather.time);
-    setForcast(weather.forecast);
+      setCity(weather.city);
+      setDate(weather.date);
+      setTemperature(weather.temperature);
+      setHumidity(weather.humidity);
+      setWind(weather.wind);
+      setIcon(weather.icon);
+      setTime(weather.time);
+      setForecast(weather.forecast);
+    } catch (error) {
+      console.error("Error fetching forecast:", error);
+    }
   }
 
   useEffect(() => {
     getForecast();
-  }, []);
+  }, [search]);
 
   useEffect(() => {
-    console.log("When selected time change do logic here", selectedTime);
+    const hoursOnly = getHours(selectedTime);
 
-    console.log(forecast);
+    const selectedForecast = forecast.hours.find((h) => {
+      return h.hoursInNumber === hoursOnly;
+    });
 
-    // fetch the data from the forecast array or filter
-    // the record based on selected time
-
-    //convert time to number or I can use the momentjs library
-    // match the time
-
-    // set the state by setting up variables
-  }, [selectedTime]);
+    if (selectedForecast) {
+      setTemperature(selectedForecast.temperature);
+      setHumidity(selectedForecast.humidity);
+      setIcon(selectedForecast.icon);
+      setTime(selectedForecast.time);
+    }
+  }, [selectedTime, forecast]);
 
   const handleTimeChange = (event) => {
     setSelectedTime(parseInt(event.target.value, 10));
   };
 
-  return (
-    <>
-      <Container>
-        <Row className="justify-content-center">
-          <Col md={12}>
-            <WeatherDetails
-              time={time}
-              city={city}
-              temperature={temperature}
-              date={date}
-              humidity={humidity}
-              wind={wind}
-              icon={icon}
-            />
+  // Function to convert 24-hour time to 12-hour time using moment
+  function convertTo12HourFormat(time24) {
+    const timeMoment = moment(`${time24}:00`, "HH:mm:ss");
+    return timeMoment.format("hh:mm A");
+  }
 
-            <Container>
-              <Row className="justify-content-center">
-                <Col md={12}>
-                  <Form.Text className="text-center">
-                    <h4 style={{ color: "#42A5F5" }}>{selectedTime}:00</h4>
-                  </Form.Text>
-                  <Form.Range
-                    style={{ color: "#42A5F5" }}
-                    type="range"
-                    min={0}
-                    max={23}
-                    step={1}
-                    value={selectedTime}
-                    onChange={handleTimeChange}
-                  />
-                </Col>
-              </Row>
-            </Container>
-          </Col>
-        </Row>
-      </Container>
-    </>
+  function getHours(time24) {
+    const timeMoment = moment(`${time24}:00`, "HH:mm:ss");
+    const hoursOnly = timeMoment.format("HH");
+    return hoursOnly;
+  }
+  return (
+    <Container>
+      <Row className="justify-content-center">
+        <Col md={12}>
+          <WeatherDetails
+            time={time}
+            city={city}
+            temperature={temperature}
+            date={date}
+            humidity={humidity}
+            wind={wind}
+            icon={icon}
+          />
+
+          <Container>
+            <Row className="justify-content-center">
+              <Col md={12}>
+                <Form.Text className="text-center">
+                  <h4 style={{ color: "#42A5F5" }}>
+                    {convertTo12HourFormat(selectedTime)}
+                  </h4>
+                </Form.Text>
+                <Form.Range
+                  style={{ color: "#42A5F5" }}
+                  type="range"
+                  min={0}
+                  max={24}
+                  step={1}
+                  value={selectedTime}
+                  onChange={handleTimeChange}
+                />
+              </Col>
+            </Row>
+          </Container>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
-export default Forecast;
+function ForecastErrorBoundary(props) {
+  return (
+    <ErrorBoundary>
+      <Forecast {...props} />
+    </ErrorBoundary>
+  );
+}
+
+export default ForecastErrorBoundary;
