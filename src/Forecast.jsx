@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col, Form, Spinner } from "react-bootstrap";
 import moment from "moment";
 
 import WeatherDetails from "./WeatherDetails";
@@ -16,6 +16,7 @@ const Forecast = () => {
   const [icon, setIcon] = useState("");
   const [forecast, setForecast] = useState({});
   const [selectedTime, setSelectedTime] = useState(3);
+  const [loading, setLoading] = useState(true);
 
   const { search } = useParams();
 
@@ -34,10 +35,13 @@ const Forecast = () => {
       setForecast(weather.forecast);
     } catch (error) {
       console.error("Error fetching forecast:", error);
+    } finally {
+      setLoading(false);
     }
   }
 
   useEffect(() => {
+    setLoading(true);
     getForecast();
   }, [search]);
 
@@ -79,36 +83,44 @@ const Forecast = () => {
     <Container>
       <Row className="justify-content-center">
         <Col md={12}>
-          <WeatherDetails
-            time={time}
-            city={city}
-            temperature={temperature}
-            date={date}
-            humidity={humidity}
-            wind={wind}
-            icon={icon}
-          />
+          {loading ? ( // Conditionally render the spinner while loading
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          ) : (
+            <>
+              <WeatherDetails
+                time={time}
+                city={city}
+                temperature={temperature}
+                date={date}
+                humidity={humidity}
+                wind={wind}
+                icon={icon}
+              />
 
-          <Container>
-            <Row className="justify-content-center">
-              <Col md={12}>
-                <Form.Text className="text-center">
-                  <h4 style={{ color: "#42A5F5" }}>
-                    {convertTo12HourFormat(selectedTime)}
-                  </h4>
-                </Form.Text>
-                <Form.Range
-                  style={{ color: "#42A5F5" }}
-                  type="range"
-                  min={0}
-                  max={24}
-                  step={1}
-                  value={selectedTime}
-                  onChange={handleTimeChange}
-                />
-              </Col>
-            </Row>
-          </Container>
+              <Container>
+                <Row className="justify-content-center">
+                  <Col md={12}>
+                    <Form.Text className="text-center">
+                      <h4 style={{ color: "#42A5F5" }}>
+                        {convertTo12HourFormat(selectedTime)}
+                      </h4>
+                    </Form.Text>
+                    <Form.Range
+                      style={{ color: "#42A5F5" }}
+                      type="range"
+                      min={0}
+                      max={24}
+                      step={1}
+                      value={selectedTime}
+                      onChange={handleTimeChange}
+                    />
+                  </Col>
+                </Row>
+              </Container>
+            </>
+          )}
         </Col>
       </Row>
     </Container>
