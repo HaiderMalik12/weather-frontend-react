@@ -6,6 +6,8 @@ import moment from "moment";
 import WeatherDetails from "./WeatherDetails";
 import ErrorBoundary from "./ErrorBoundary";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const Forecast = () => {
   const [city, setCity] = useState("");
   const [time, setTime] = useState("");
@@ -22,7 +24,7 @@ const Forecast = () => {
 
   async function getForecast() {
     try {
-      const res = await fetch(`http://localhost:3001/api/forecast/${search}`);
+      const res = await fetch(`${apiUrl}/api/forecast/${search}`);
       const weather = await res.json();
 
       setCity(weather.city);

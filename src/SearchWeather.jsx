@@ -7,6 +7,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Spinner from "react-bootstrap/Spinner";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const SearchWeather = () => {
   const [location, setLocation] = useState("Faisalabad");
   const [city, setCity] = useState("");
@@ -33,9 +35,7 @@ const SearchWeather = () => {
         setIsLocationInvalid(false);
         setLoading(true);
         // Continue with your weather fetching logic
-        const res = await fetch(
-          `http://localhost:3001/api/weather/${location}`
-        );
+        const res = await fetch(`${apiUrl}/api/weather/${location}`);
         const weather = await res.json();
 
         setCity(weather.city);

@@ -1,19 +1,8 @@
-# Project Setup
+# React + Vite
 
-## Step 1: Clone the Backend Project
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-This frontend application consume the backend node.js project. You have to clone this [Weather API Backend](https://github.com/HaiderMalik12/weather-app-backend) and run the project
+Currently, two official plugins are available:
 
-## Step 2: Install Dependencies
-
-```bash
-npm install
-```
-
-## Step 3: Run the Project
-
-```bash
-npm run dev
-```
-
-Your project will be runnint at `http://localhost:5173/`
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

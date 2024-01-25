@@ -1,4 +1,3 @@
-import { createRoot } from "react-dom/client";
 import SearchWeather from "./SearchWeather";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,6 +18,4 @@ const App = () => {
   );
 };
 
-const container = document.getElementById("root");
-const root = createRoot(container);
-root.render(<App />);
+export default App
